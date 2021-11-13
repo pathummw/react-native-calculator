@@ -1,62 +1,73 @@
-import React from 'react'
-import { Text, View, TextInput, StyleSheet, KeyboardAvoidingView, TouchableOpacity, ScrollView } from 'react-native'
+import React, { useState } from 'react'
+import { Text, View, TextInput, StyleSheet, KeyboardAvoidingView, TouchableOpacity, ScrollView, Button } from 'react-native'
 
 export default function Display() {
+
+    const [number, setNumber] = useState(0);
     return (
 
         <View style={styles.container}>
-            <View style={styles.text}>
-                <Text >Hi tet</Text>
+            <View style={styles.result}>
+                <Text style={styles.displayText}>{number}</Text>
             </View>
-            <View style={styles.controls}>
-                <View style={styles.rowOne}>
-                    <View style={styles.row1_1}><Text style={styles.textStyle}>c</Text></View>
-                    <View style={styles.row1_1}><Text style={styles.textStyle}>/</Text></View>
-                    <View style={styles.row1_1}><Text style={styles.textStyle}>x</Text></View>
-                    <View style={styles.row1_1}><Text style={styles.textStyle}> -x </Text></View>
+            <View style={styles.operatorsTopRow}>
+                <TouchableOpacity style={styles.btnTopOperator}>
+                    <Text> C </Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.btnTopOperator}>
+                    <Text> % </Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.btnTopOperator}>
+                    <Text> X </Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.btnTopOperator}>
+                    <Text> x </Text>
+                </TouchableOpacity>
+            </View>
+            <View style={styles.belowTopOperators}>
+                <View style={styles.numberPanel}>
+                    <View style={styles.numberRowOne}>
+                        <TouchableBtn title={'C'} />
+                        <TouchableBtn title={'/'} />
+                        <TouchableBtn title={'X'} />
+                    </View>
+                    <View style={styles.numberRowOne}>
+                        <TouchableBtn title={'7'} />
+                        <TouchableBtn title={'8'} />
+                        <TouchableBtn title={'9'} />
+                    </View>
+                    <View style={styles.numberRowOne}>
+                        <TouchableBtn title={'4'} />
+                        <TouchableBtn title={'5'} />
+                        <TouchableBtn title={'6'} />
+                    </View>
+                    <View style={styles.numberRowOne}>
+                        <TouchableBtn title={'1'} />
+                        <TouchableBtn title={'2'} />
+                        <TouchableBtn title={'3'} />
+                    </View>
+                    <View style={styles.numberRowOne}>
+                        <TouchableBtn title={'%'} />
+                        <TouchableBtn title={'0'} />
+                        <TouchableBtn title={'.'} />
+                    </View>
                 </View>
-                <View style={styles.rowTwo}>
-                    <View style={styles.row1_1}><Text style={styles.textStyle}>7</Text></View>
-                    <View style={styles.row1_1}><Text style={styles.textStyle}>8</Text></View>
-                    <View style={styles.row1_1}><Text style={styles.textStyle}>9</Text></View>
-                    <View style={styles.row1_1}><Text style={styles.textStyle}>-</Text></View>
-
-                </View>
-                <View style={styles.rowThree}>
-                    <View style={styles.row1_1}><Text style={styles.textStyle}>4</Text></View>
-                    <View style={styles.row1_1}><Text style={styles.textStyle}>5</Text></View>
-                    <View style={styles.row1_1}><Text style={styles.textStyle}>6</Text></View>
-                    <View style={styles.row1_1}><Text style={styles.textStyle}>+</Text></View>
-                </View>
-                <View style={styles.rowFour}>
-                    <View style={styles.row4_1}>
-                        <View style={styles.row1_1_1}>
-                            <Text style={styles.textStyle}>1</Text>
-                        </View>
-                        <View style={styles.row1_1_1}>
-                            <Text style={styles.textStyle}>/</Text>
-                        </View>
+                <View style={styles.sideOperators}>
+                    <View style={styles.minus}>
+                        <TouchableOpacity style={styles.btnSideOperator}>
+                            <Text> - </Text>
+                        </TouchableOpacity>
                     </View>
-                    <View style={styles.row4_1}>
-                        <View style={styles.row1_1_1}>
-                            <Text style={styles.textStyle}>2</Text>
-                        </View>
-                        <View style={styles.row1_1_1}>
-                            <Text style={styles.textStyle}>0</Text>
-                        </View>
+                    <View style={styles.plus}>
+                        <TouchableOpacity style={styles.btnSideOperator}>
+                            <Text> + </Text>
+                        </TouchableOpacity>
                     </View>
-                    <View style={styles.row4_1}>
-                        <View style={styles.row1_1_1}>
-                            <Text style={styles.textStyle}>3</Text>
-                        </View>
-                        <View style={styles.row1_1_1}>
-                            <Text style={styles.textStyle}>.</Text>
-                        </View>
+                    <View style={styles.equal}>
+                        <TouchableOpacity style={styles.btnSideOperator}>
+                            <Text> = </Text>
+                        </TouchableOpacity>
                     </View>
-                    <View style={styles.row4_1}>
-                        <Text style={styles.textStyle}>=</Text>
-                    </View>
-
                 </View>
             </View>
         </View>
@@ -70,66 +81,93 @@ const styles = StyleSheet.create({
         height: '100%',
         backgroundColor: '#4a56e8',
     },
-    text: {
-        /* backgroundColor: 'red', */
-        flex: 1,
-    },
-    controls: {
-        /* backgroundColor: 'yellow', */
-        flex: 3,
-    },
-    rowOne: {
-        /* backgroundColor: '#4a56e8', */
-        flex: 1,
-        flexDirection: 'row',
-    },
-    rowTwo: {
-        /* backgroundColor: '#f05c40', */
-        flex: 1,
-        flexDirection: 'row'
-    },
-    rowThree: {
-        /* backgroundColor: '#ffc80c', */
-        flex: 1,
-        flexDirection: 'row'
-    },
-    rowFour: {
-        backgroundColor: '#4a56e8',
+    result: {
         flex: 2,
+        /* backgroundColor: 'red' */
+    },
+    operatorsTopRow: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'stretch',
+        justifyContent: 'space-between',
+    },
+    belowTopOperators: {
+        flex: 4,
+        /* backgroundColor: 'green', */
+        flexDirection: 'row'
+    },
+    numberPanel: {
+        flex: 3,
+        /* backgroundColor: 'yellow', */
+    },
+    sideOperators: {
+        flex: 1,
+        /* backgroundColor: 'blue', */
+    },
+    btnTopOperator: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '25%',
+        margin: 1,
+        backgroundColor: '#434554',
+    },
+    numberRowOne: {
+        flex: 1,
         flexDirection: 'row',
     },
-    row1_1: {
+    minus: {
+        flex: 1,
         backgroundColor: '#434554',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: 1
+    },
+    plus: {
         flex: 1,
-        margin: 0.7,
+        backgroundColor: '#434554',
         alignItems: 'center',
         justifyContent: 'center'
-    },
-    row4_1: {
-        backgroundColor: '#4a56e8',
-        flex: 1,
-        margin: 0.7,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-
-    textStyle: {
-        color: 'white',
-        fontSize: 32
     },
     equal: {
-        flex: 3,
-        flexDirection: 'column'
-    },
-    row1_1_1: {
-        flex: 1,
-        justifyContent: 'space-evenly',
+        flex: 2,
+        backgroundColor: 'green',
         alignItems: 'center',
-        marginBottom: 2,
+        justifyContent: 'center',
+        backgroundColor: '#ffc80c'
+    },
+    btnSideOperator: {
+        justifyContent: 'center',
+        alignItems: 'center',
         width: '100%',
-        backgroundColor: '#434554'
+        margin: 1,
+        /* backgroundColor: '#434554', */
+        height: '100%'
+    },
+    btnNumbers: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '32%',
+        margin: 1,
+    },
+    text: {
+        color: 'white',
+        fontSize: 24,
+        fontFamily: 'Roboto'
+    },
+    displayText: {
+        color: 'white',
+        fontSize: 72,
+        fontFamily: 'Roboto',
+        padding: 5,
     }
 
-
-
 })
+
+
+const TouchableBtn = ({ title }) => {
+    return (
+        <TouchableOpacity style={styles.btnNumbers}>
+            <Text style={styles.text}> {title} </ Text>
+        </TouchableOpacity>
+    )
+}
